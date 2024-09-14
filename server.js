@@ -14,7 +14,7 @@ server.on('connection', (socket)=> {
   socket.on('data', (data) => {
     
     clients.map((client) => {
-      client.socket.write(data)
+      client.socket.write(`>User ${userId}: ${data}`)
     });
 
   });
@@ -33,6 +33,6 @@ server.on('connection', (socket)=> {
   
 })
 
-server.listen(8000, '127.0.0.1', ()=> {
+server.listen(8080, '127.0.0.1', ()=> {
   console.log('Open server in ', server.address());
 })

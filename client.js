@@ -17,6 +17,7 @@ const clearLine = (dir) => {
   });
 };
 
+
 const moveCursor = (dx, dy) => {
   return new Promise((res, rej) => {
     process.stdout.moveCursor(dx, dy, ()=> {
@@ -25,17 +26,18 @@ const moveCursor = (dx, dy) => {
   })
 }
 
-let id;
 
+let id;
 const socket = net.createConnection(
-  {port: 8000, host: '127.0.0.1'}, 
+  {port: 8080, host: '127.0.0.1'}, 
   async() => {
     console.log('Connected to server..');
+
     const ask = async () => {
       const message = await rl.question('Enter a message: ');
       // move the input down
       await moveCursor(0, -1);
-      socket.write(`>User ${id}: ${message}`);
+      socket.write(message);
     }
 
     ask()
